@@ -142,7 +142,7 @@ class _UserHomePageState extends State<UserHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ListTile(
-                        leading: const Icon(Ionicons.star_half,
+                        leading: const Icon(Ionicons.heart,
                         size: 37,),
                         title: Text("Your Favourites",
                       style: GoogleFonts.openSans(
@@ -175,6 +175,53 @@ class _UserHomePageState extends State<UserHomePage> {
                     ],
                   )
                 ),
+                whitespace(context, 1.7, 0),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+                  height: size.height * 21,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    color: Colors.purple[100],
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Ionicons.star_half,
+                        size: 37,),
+                        title: Text("Important Words",
+                      style: GoogleFonts.openSans(
+                        color: Colors.grey.shade800,
+                        fontSize: 20,
+                      ),),
+                      subtitle: Text("Important words - rated up to 3.",
+                      style: GoogleFonts.openSans(),),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomRight,
+                        child: SizedBox(
+                          width: 80,
+                          child: TextButton(
+                                style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.purple.shade400,
+                                    shape: const StadiumBorder()),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const FavouriteListScreen()));
+                                },
+                                // icon: const Icon(Icons.search),
+                                child: const Text("Check")),
+                        ),
+                      )
+                    ],
+                  )
+                ),
+                whitespace(context, 2, 0),
               ],
             ),
           ),

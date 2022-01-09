@@ -18,8 +18,18 @@ class _AddWordScreenState extends State<AddWordScreen> {
   TextEditingController examplecontroller = TextEditingController();
   TextEditingController ratingcontroller = TextEditingController();
   TextEditingController synonymcontroller = TextEditingController();
+  
 
    CollectionReference words = FirebaseFirestore.instance.collection("dictionarywords");
+
+   final types = ['noun', 'pronoun', 'adjective', 'verb', 'adverb'];
+   String? value;
+  DropdownMenuItem<String> builddropdownitem(String item){
+   return DropdownMenuItem(
+      value: item,
+      child: Center(child: Text(item)));
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size / 100;
@@ -88,31 +98,51 @@ class _AddWordScreenState extends State<AddWordScreen> {
               SizedBox(
                 height: size.height * 2.6,
               ),
-              TextFormField(
-                controller: typecontroller,
-                // maxLines: 3,
-                decoration: InputDecoration(
-                    isDense: true,
-                    // icon: const Icon(Icons.menu_book_sharp),
-                    hintText: 'Type',
-                    labelText: 'Type',
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                      borderSide: const BorderSide(
-                        color: Colors.blue,
-                      ),
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                      borderSide: const BorderSide(
-                        color: Colors.black,
-                        width: 1.0,
-                      ),
-                    )),
+            Container(
+              padding: EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                border: Border.all(color: Colors.black54)
               ),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  isExpanded: true,
+                  items: types.map(builddropdownitem).toList(),
+                  value: value, 
+                onChanged: (val)=>setState(() {
+                  this.value = val as String?;
+                }),),
+              ),
+            ),
               SizedBox(
                 height: size.height * 2.6,
               ),
+
+              // TextFormField(
+              //   controller: typecontroller,
+              //   // maxLines: 3,
+              //   decoration: InputDecoration(
+              //       isDense: true,
+              //       // icon: const Icon(Icons.menu_book_sharp),
+              //       hintText: 'Type',
+              //       labelText: 'Type',
+              //       focusedBorder: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(10.0),
+              //         borderSide: const BorderSide(
+              //           color: Colors.blue,
+              //         ),
+              //       ),
+              //       enabledBorder: OutlineInputBorder(
+              //         borderRadius: BorderRadius.circular(15),
+              //         borderSide: const BorderSide(
+              //           color: Colors.black,
+              //           width: 1.0,
+              //         ),
+              //       )),
+              // ),
+              // SizedBox(
+              //   height: size.height * 2.6,
+              // ),
               TextFormField(
                 controller: examplecontroller,
                 maxLines: 3,
@@ -194,9 +224,9 @@ class _AddWordScreenState extends State<AddWordScreen> {
                   onPressed: ()async{
                     await words.doc(wordscontroller.text.toLowerCase()).set(
                       {'meaning':meaningcontroller.text,
-                    'type':typecontroller.text,
+                    'type':value,
                     'example':examplecontroller.text,
-                    'rating':ratingcontroller.text,
+                    'rating':int.parse(ratingcontroller.text),
                     'synonym':synonymcontroller.text,
                     });
                   },

@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:gre_helper/addwordsscreen.dart';
 import 'package:gre_helper/allwordsscreen.dart';
+import 'package:gre_helper/boilerplateimportantwords.dart';
+import 'package:gre_helper/choseimportancescreen.dart';
 import 'package:gre_helper/favouritelistscreen.dart';
 import 'package:gre_helper/jsonwordsscreen.dart';
 import 'package:gre_helper/loginscreen.dart';
