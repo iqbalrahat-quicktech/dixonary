@@ -5,8 +5,8 @@ import 'package:gre_helper/commonwidgets.dart';
 import 'package:gre_helper/successfavouritescreen.dart';
 import 'package:ionicons/ionicons.dart';
 
-CollectionReference addfavouriteReference = FirebaseFirestore.instance.collection("favourites");
-
+CollectionReference addfavouriteReference =
+    FirebaseFirestore.instance.collection("favourites");
 
 class WordDetailsScreen extends StatefulWidget {
   String? recievedword;
@@ -34,12 +34,13 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
         child: Column(
           children: [
             whitespace(context, 5, 0),
-            Text(widget.recievedword.toString(),
-            style:GoogleFonts.notoSerif(
-              fontSize: 26,
-              color: Colors.purple,
-            ) ,),
-           
+            Text(
+              widget.recievedword.toString(),
+              style: GoogleFonts.notoSerif(
+                fontSize: 26,
+                color: Colors.purple,
+              ),
+            ),
             whitespace(context, 3, 0),
             Container(
               padding: const EdgeInsets.fromLTRB(15, 15, 15, 35),
@@ -47,20 +48,87 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.purple[200],
-              borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
                 children: [
-                   Text(type.toString(),
-                   style: GoogleFonts.openSans(
-                     fontStyle: FontStyle.italic,
-                   ),),
-                   whitespace(context, 3, 0),
-                  Text(meaning.toString(),
-                  style: GoogleFonts.openSans(
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),),
+                  Text(
+                    type.toString(),
+                    style: GoogleFonts.openSans(
+                      fontStyle: FontStyle.italic,
+                    ),
+                  ),
+                  whitespace(context, 3, 0),
+                  Text(
+                    meaning.toString(),
+                    style: GoogleFonts.openSans(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            whitespace(context, 2, 0),
+            Container(
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 35),
+              // height: size.height*30,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.purple[50],
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      const Spacer(),
+                      Icon(
+                        Ionicons.star,
+                        color: Colors.brown.shade600,
+                        size: 18.5,
+                      ),
+                      whitespace(context, 0, 2),
+                      Text(
+                        "Rating : " + rating.toString(),
+                        style: GoogleFonts.openSans(
+                          color: Colors.red.shade800,
+                          // fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                  whitespace(context, 3, 0),
+                  Text(
+                    "Example",
+                    style: GoogleFonts.openSans(
+                      fontSize: 14,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  Text(
+                    example.toString(),
+                    style: GoogleFonts.openSans(
+                      fontSize: 18,
+                      color: Colors.black87,
+                    ),
+                  ),
+                  whitespace(context, 3, 0),
+                  Text(
+                    "Synonym",
+                    style: GoogleFonts.openSans(
+                      fontSize: 11.8,
+                      color: Colors.black54,
+                    ),
+                  ),
+                  Text(
+                    synonyms.toString(),
+                    style: GoogleFonts.openSans(
+                      fontSize: 18,
+                      color: Colors.black87,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -68,18 +136,24 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
             Align(
               alignment: Alignment.bottomRight,
               child: TextButton.icon(
-                onPressed: () {
-                  addtofav();
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const SuccessFavouriteScreen()));
-                },
-                icon: const Icon(Ionicons.heart,
-                color: Colors.purple,),
-                label: Text(
-                  "Add To Favourites",
-                  style: GoogleFonts.openSans(
-                    color: Colors.grey.shade700,
+                  onPressed: () {
+                    addtofav();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const SuccessFavouriteScreen()));
+                  },
+                  icon: const Icon(
+                    Ionicons.heart,
+                    color: Colors.purple,
                   ),
-                )),
+                  label: Text(
+                    "Add To Favourites",
+                    style: GoogleFonts.openSans(
+                      color: Colors.grey.shade700,
+                    ),
+                  )),
             )
           ],
         ),
@@ -89,6 +163,10 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
 
   String? meaning;
   String? type;
+  String? rating;
+  String? example;
+  String? synonyms;
+
   getdetails() async {
     DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
         .collection("dictionarywords")
@@ -102,6 +180,9 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
     setState(() {
       meaning = mapdata["meaning"];
       type = mapdata["type"];
+      rating = mapdata["rating"].toString();
+      example = mapdata["example"];
+      synonyms = mapdata["synonym"];
     });
 
     //   print("This is print of mapdata :  " + mapdata.toString());
@@ -113,6 +194,6 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
     await addfavouriteReference
         .doc(widget.recievedword)
         .set({'meaning': meaning, 'type': type});
-        print("Word Added to fav");
+    print("Word Added to fav");
   }
 }

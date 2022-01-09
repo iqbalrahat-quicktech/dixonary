@@ -9,8 +9,8 @@ import 'package:gre_helper/searchscreen.dart';
 import 'package:gre_helper/successwordaddscreen.dart';
 import 'package:gre_helper/welcomescreen.dart';
 
-void main()async {
-    WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyApp());
 }
@@ -36,8 +36,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const WelcomeScreen(),
+      home: const UserHomePage(),
     );
   }
 }
-

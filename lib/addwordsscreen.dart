@@ -1,25 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gre_helper/commonwidgets.dart';
 import 'package:gre_helper/jsonwordsscreen.dart';
 
 class AddWordScreen extends StatefulWidget {
-  const AddWordScreen({ Key? key }) : super(key: key);
+  const AddWordScreen({Key? key}) : super(key: key);
 
   @override
   _AddWordScreenState createState() => _AddWordScreenState();
 }
 
 class _AddWordScreenState extends State<AddWordScreen> {
-    TextEditingController wordscontroller = TextEditingController();
+  TextEditingController wordscontroller = TextEditingController();
   TextEditingController meaningcontroller = TextEditingController();
   TextEditingController typecontroller = TextEditingController();
   TextEditingController examplecontroller = TextEditingController();
   TextEditingController ratingcontroller = TextEditingController();
   TextEditingController synonymcontroller = TextEditingController();
 
-   CollectionReference words = FirebaseFirestore.instance.collection("dictionarywords");
+  CollectionReference words =
+      FirebaseFirestore.instance.collection("dictionarywords");
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size / 100;
@@ -38,7 +40,7 @@ class _AddWordScreenState extends State<AddWordScreen> {
                   fontSize: 20,
                 ),
               ),
-             whitespace(context, 2, 0),
+              whitespace(context, 2, 0),
               TextFormField(
                 controller: wordscontroller,
                 decoration: InputDecoration(
@@ -65,7 +67,6 @@ class _AddWordScreenState extends State<AddWordScreen> {
               ),
               TextFormField(
                 controller: meaningcontroller,
-          
                 decoration: InputDecoration(
                     isDense: true,
                     // icon: const Icon(Icons.menu_book_sharp),
@@ -163,6 +164,7 @@ class _AddWordScreenState extends State<AddWordScreen> {
                 height: size.height * 2.6,
               ),
               TextFormField(
+                keyboardType: TextInputType.number,
                 controller: ratingcontroller,
                 decoration: InputDecoration(
                     isDense: true,
@@ -183,7 +185,6 @@ class _AddWordScreenState extends State<AddWordScreen> {
                       ),
                     )),
               ),
-              
               SizedBox(
                 height: size.height * 3.5,
               ),
@@ -191,13 +192,13 @@ class _AddWordScreenState extends State<AddWordScreen> {
                 width: 200,
                 child: TextButton(
                   // elevation : 0,
-                  onPressed: ()async{
-                    await words.doc(wordscontroller.text.toLowerCase()).set(
-                      {'meaning':meaningcontroller.text,
-                    'type':typecontroller.text,
-                    'example':examplecontroller.text,
-                    'rating':ratingcontroller.text,
-                    'synonym':synonymcontroller.text,
+                  onPressed: () async {
+                    await words.doc(wordscontroller.text.toLowerCase()).set({
+                      'meaning': meaningcontroller.text,
+                      'type': typecontroller.text,
+                      'example': examplecontroller.text,
+                      'rating': int.parse(ratingcontroller.text),
+                      'synonym': synonymcontroller.text,
                     });
                   },
                   child: const Text(
@@ -212,15 +213,19 @@ class _AddWordScreenState extends State<AddWordScreen> {
                   ),
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: size.height * 1.5,
               ),
               SizedBox(
                 width: 200,
                 child: TextButton(
                   // elevation : 0,
-                  onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const AllWordsScreenFromJson()));
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const AllWordsScreenFromJson()));
                   },
                   child: const Text(
                     "ADD From File",
@@ -238,7 +243,6 @@ class _AddWordScreenState extends State<AddWordScreen> {
           ),
         ),
       ),
-      
     );
   }
 }
