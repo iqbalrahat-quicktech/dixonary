@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gre_helper/allwordsscreen.dart';
+import 'package:gre_helper/choseimportancescreen.dart';
 import 'package:gre_helper/commonwidgets.dart';
 import 'package:gre_helper/favouritelistscreen.dart';
 import 'package:gre_helper/worddetailsscreen.dart';
@@ -195,7 +196,7 @@ class _UserHomePageState extends State<UserHomePage> {
                         color: Colors.grey.shade800,
                         fontSize: 20,
                       ),),
-                      subtitle: Text("Important words - rated up to 3.",
+                      subtitle: Text("Important words for a quick memorization.",
                       style: GoogleFonts.openSans(),),
                       ),
                       Align(
@@ -212,10 +213,10 @@ class _UserHomePageState extends State<UserHomePage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const FavouriteListScreen()));
+                                              const ChoseImportanceScreen()));
                                 },
                                 // icon: const Icon(Icons.search),
-                                child: const Text("Check")),
+                                child: const Text("See")),
                         ),
                       )
                     ],

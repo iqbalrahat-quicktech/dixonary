@@ -31,7 +31,7 @@ class _BoilerplateImportantWordsState extends State<BoilerplateImportantWords> {
             whitespace(context, 2, 0),
             StreamBuilder(
                       stream: FirebaseFirestore.instance
-                          .collection("dictionarywords").where('rating', isEqualTo: '5')
+                          .collection("dictionarywords").where('rating', isEqualTo: 5)
                           .snapshots(),
                       builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
                         if (streamSnapshot.hasData) {

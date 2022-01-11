@@ -21,7 +21,7 @@ class _AddWordScreenState extends State<AddWordScreen> {
   TextEditingController synonymcontroller = TextEditingController();
   
 
-<<<<<<< HEAD
+
    CollectionReference words = FirebaseFirestore.instance.collection("dictionarywords");
 
    final types = ['noun', 'pronoun', 'adjective', 'verb', 'adverb'];
@@ -32,10 +32,7 @@ class _AddWordScreenState extends State<AddWordScreen> {
       child: Center(child: Text(item)));
   }
 
-=======
-  CollectionReference words =
-      FirebaseFirestore.instance.collection("dictionarywords");
->>>>>>> 6b6ed21844eaaf214390f7bdf9286c806ebd4fd6
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size / 100;
@@ -226,24 +223,15 @@ class _AddWordScreenState extends State<AddWordScreen> {
                 width: 200,
                 child: TextButton(
                   // elevation : 0,
-<<<<<<< HEAD
                   onPressed: ()async{
                     await words.doc(wordscontroller.text.toLowerCase()).set(
                       {'meaning':meaningcontroller.text,
                     'type':value,
                     'example':examplecontroller.text,
                     'rating':int.parse(ratingcontroller.text),
-                    'synonym':synonymcontroller.text,
-=======
-                  onPressed: () async {
-                    await words.doc(wordscontroller.text.toLowerCase()).set({
-                      'meaning': meaningcontroller.text,
-                      'type': typecontroller.text,
-                      'example': examplecontroller.text,
-                      'rating': int.parse(ratingcontroller.text),
-                      'synonym': synonymcontroller.text,
->>>>>>> 6b6ed21844eaaf214390f7bdf9286c806ebd4fd6
-                    });
+                    'synonym':synonymcontroller.text,}
+                    );
+                  
                   },
                   child: const Text(
                     "ADD",

@@ -132,69 +132,7 @@ class _WordDetailsScreenState extends State<WordDetailsScreen> {
                 ],
               ),
             ),
-            whitespace(context, 2, 0),
-            Container(
-              padding: const EdgeInsets.fromLTRB(15, 15, 15, 35),
-              // height: size.height*30,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.purple[50],
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      const Spacer(),
-                      Icon(
-                        Ionicons.star,
-                        color: Colors.brown.shade600,
-                        size: 18.5,
-                      ),
-                      whitespace(context, 0, 2),
-                      Text(
-                        "Rating : " + rating.toString(),
-                        style: GoogleFonts.openSans(
-                          color: Colors.red.shade800,
-                          // fontStyle: FontStyle.italic,
-                        ),
-                      ),
-                    ],
-                  ),
-                  whitespace(context, 3, 0),
-                  Text(
-                    "Example",
-                    style: GoogleFonts.openSans(
-                      fontSize: 14,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  Text(
-                    example.toString(),
-                    style: GoogleFonts.openSans(
-                      fontSize: 18,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  whitespace(context, 3, 0),
-                  Text(
-                    "Synonym",
-                    style: GoogleFonts.openSans(
-                      fontSize: 11.8,
-                      color: Colors.black54,
-                    ),
-                  ),
-                  Text(
-                    synonyms.toString(),
-                    style: GoogleFonts.openSans(
-                      fontSize: 18,
-                      color: Colors.black87,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+           
             whitespace(context, 2, 0),
             Align(
               alignment: Alignment.bottomRight,
